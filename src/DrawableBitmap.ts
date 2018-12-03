@@ -1,10 +1,12 @@
 import Bitmap = createjs.Bitmap;
 import MouseEvent = createjs.MouseEvent;
 import Shape = createjs.Shape;
+import Point = createjs.Point;
 
 export class DrawableBitmap extends Bitmap {
   private option?: DrawingOption;
   private isDrawing: boolean = false;
+  private points: Map<number, Point>;
   /**
    * コンストラクタ
    * @param {number} w
@@ -14,6 +16,7 @@ export class DrawableBitmap extends Bitmap {
     super(document.createElement("canvas"));
     this.canvas.width = w;
     this.canvas.height = h;
+    this.points = new Map<number, Point>();
     this.clear();
     this.initHitArea();
   }
@@ -39,14 +42,16 @@ export class DrawableBitmap extends Bitmap {
   /**
    * ユーザーによるMouse / Touchでの描画操作を開始する。
    */
-  public startDrawing(): void {
+  public startDrawing( option:DrawingOption ): void {
+
+    this.changeMode( option );
+
     if (this.isDrawing) return;
     this.isDrawing = true;
 
     this.addEventListener("mousedown", this.onStartStroke);
     this.addEventListener("pressmove", this.onStroke);
     this.addEventListener("pressup", this.onFinishStroke);
-    console.log("start");
   }
 
   /**
@@ -61,17 +66,40 @@ export class DrawableBitmap extends Bitmap {
     this.removeEventListener("pressup", this.onFinishStroke);
   }
 
-  private onStartStroke(e: MouseEvent): void {
-    console.log("ID : ", e.pointerID, e.localX, e.localY);
-  }
+  private onStartStroke = (e: MouseEvent) => {
+    console.log("ID : ", e.pointerID, e.localX, e.localY, "start");
 
-  private onStroke(e: MouseEvent): void {
-    console.log("ID : ", e.pointerID, e.localX, e.localY);
-  }
+    this.points.set(e.pointerID, new Point(e.localX, e.localY));
+  };
 
-  private onFinishStroke(e: MouseEvent): void {
+  private onStroke = (e: MouseEvent) => {
     console.log("ID : ", e.pointerID, e.localX, e.localY);
-  }
+
+    const ctx = this.ctx;
+    //描画モードを分岐
+    switch (this.option.mode) {
+      case DrawingMode.pen:
+        ctx.globalCompositeOperation = "source-over";
+        ctx.strokeStyle = this.option.color;
+        break;
+      case DrawingMode.eraser:
+        ctx.globalCompositeOperation = "destination-out";
+        break;
+    }
+
+    const point = this.points.get ( e.pointerID);
+    ctx.moveTo( point.x, point.y );
+    ctx.lineTo( e.localX, e.localY );
+    ctx.stroke();
+
+    this.points.set(e.pointerID, new Point(e.localX, e.localY));
+  };
+
+  private onFinishStroke = (e: MouseEvent) => {
+    console.log("ID : ", e.pointerID, e.localX, e.localY);
+
+    this.points.delete(e.pointerID);
+  };
 
   /**
    * 画像をクリアする。全ての画素はrgba( 0, 0, 0, 0.0)となる。
@@ -96,5 +124,5 @@ export enum DrawingMode {
 
 export class DrawingOption {
   mode: DrawingMode;
-  color?: number;
+  color?: string;
 }
