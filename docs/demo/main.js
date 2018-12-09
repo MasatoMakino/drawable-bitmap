@@ -3,7 +3,14 @@ import { DrawableBitmap, DrawingMode } from "../../bin/DrawableBitmap";
 let stage;
 let bitmap;
 
+const modeSelector = 'input[name="mode"]';
+const colorSelector = 'input[name="color"]';
+const widthSelector = 'input[name="width"]';
+const clearSelector = 'input[name="clearButton"]';
+
 const onDomContentsLoaded = () => {
+  initInputListener();
+
   //ステージ更新処理
   const updateStage = () => {
     stage.update();
@@ -18,7 +25,32 @@ const onDomContentsLoaded = () => {
 
   createjs.Ticker.on("tick", updateStage);
   testBitmap();
-  startDrawing();
+  initDrawing();
+};
+
+const initInputListener = () => {
+  const elm = document.querySelectorAll(modeSelector);
+  elm.forEach(item => {
+    item.onchange = e => {
+      bitmap.startDrawing({ mode: e.target.value });
+    };
+  });
+
+  document.querySelector(colorSelector).onchange = e => {
+    bitmap.startDrawing({
+      color: e.target.value
+    });
+  };
+
+  document.querySelector(widthSelector).onchange = e => {
+    bitmap.startDrawing({
+      width: e.target.value
+    });
+  };
+
+  document.querySelector(clearSelector).onclick = e => {
+    bitmap.clear();
+  };
 };
 
 const testBitmap = () => {
@@ -26,35 +58,16 @@ const testBitmap = () => {
   stage.addChild(bitmap);
 };
 
-const startDrawing = () => {
+const initDrawing = () => {
+  const mode = document.querySelector(modeSelector + ":checked").value;
+  const color = document.querySelector(colorSelector).value;
+  const width = document.querySelector(widthSelector).value;
   bitmap.startDrawing({
-    mode: DrawingMode.pen,
-    color: "#F0F",
-    width: 1.0
+    mode: mode,
+    color: color,
+    width: width
   });
 };
-
-const startEraser = () => {
-  bitmap.startDrawing({
-    mode: DrawingMode.eraser,
-    width: 8.0
-  });
-};
-
-document.addEventListener("keydown", e => {
-  console.log(e.key);
-  switch (e.key) {
-    case "e":
-      startEraser();
-      break;
-    case "d":
-      startDrawing();
-      break;
-    case "c":
-      bitmap.clear();
-      break;
-  }
-});
 
 /**
  * DOMContentLoaded以降に初期化処理を実行する
