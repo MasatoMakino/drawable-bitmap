@@ -42,9 +42,8 @@ export class DrawableBitmap extends Bitmap {
   /**
    * ユーザーによるMouse / Touchでの描画操作を開始する。
    */
-  public startDrawing( option:DrawingOption ): void {
-
-    this.changeMode( option );
+  public startDrawing(option: DrawingOption): void {
+    this.changeMode(option);
 
     if (this.isDrawing) return;
     this.isDrawing = true;
@@ -86,10 +85,12 @@ export class DrawableBitmap extends Bitmap {
         ctx.globalCompositeOperation = "destination-out";
         break;
     }
+    ctx.lineWidth = this.option.width;
 
-    const point = this.points.get ( e.pointerID);
-    ctx.moveTo( point.x, point.y );
-    ctx.lineTo( e.localX, e.localY );
+    const point = this.points.get(e.pointerID);
+    ctx.beginPath();
+    ctx.moveTo(point.x, point.y);
+    ctx.lineTo(e.localX, e.localY);
     ctx.stroke();
 
     this.points.set(e.pointerID, new Point(e.localX, e.localY));
@@ -124,5 +125,6 @@ export enum DrawingMode {
 
 export class DrawingOption {
   mode: DrawingMode;
-  color?: string;
+  color: string = "#000000";
+  width: number = 1.0;
 }
