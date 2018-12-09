@@ -37,6 +37,14 @@ export class DrawableBitmap extends Bitmap {
 
   public changeMode(option: DrawingOption): void {
     this.option = option;
+
+    const ctx = this.ctx;
+    if (this.option.color == null){
+        this.option.color = ctx.strokeStyle as string;
+    }
+    if (this.option.width == null) {
+        this.option.width = ctx.lineWidth;
+    }
   }
 
   /**
@@ -70,7 +78,6 @@ export class DrawableBitmap extends Bitmap {
   };
 
   private onStroke = (e: MouseEvent) => {
-
     const point = this.points.get(e.pointerID);
     if (point == null) return;
 
