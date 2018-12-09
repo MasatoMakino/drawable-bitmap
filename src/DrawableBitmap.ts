@@ -56,6 +56,9 @@ export class DrawableBitmap extends Bitmap {
     if (this.option.width == null) {
       this.option.width = ctx.lineWidth;
     }
+
+    ctx.strokeStyle = this.option.color;
+    ctx.lineWidth = this.option.width;
   }
 
   /**
