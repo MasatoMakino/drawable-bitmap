@@ -39,11 +39,11 @@ export class DrawableBitmap extends Bitmap {
     this.option = option;
 
     const ctx = this.ctx;
-    if (this.option.color == null){
-        this.option.color = ctx.strokeStyle as string;
+    if (this.option.color == null) {
+      this.option.color = ctx.strokeStyle as string;
     }
     if (this.option.width == null) {
-        this.option.width = ctx.lineWidth;
+      this.option.width = ctx.lineWidth;
     }
   }
 
