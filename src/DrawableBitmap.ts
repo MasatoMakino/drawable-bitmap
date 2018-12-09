@@ -66,16 +66,16 @@ export class DrawableBitmap extends Bitmap {
   }
 
   private onStartStroke = (e: MouseEvent) => {
-    console.log("ID : ", e.pointerID, e.localX, e.localY, "start");
-
     this.points.set(e.pointerID, new Point(e.localX, e.localY));
   };
 
   private onStroke = (e: MouseEvent) => {
-    console.log("ID : ", e.pointerID, e.localX, e.localY);
+
+    const point = this.points.get(e.pointerID);
+    if (point == null) return;
 
     const ctx = this.ctx;
-    //描画モードを分岐
+
     switch (this.option.mode) {
       case DrawingMode.pen:
         ctx.globalCompositeOperation = "source-over";
@@ -86,19 +86,19 @@ export class DrawableBitmap extends Bitmap {
         break;
     }
     ctx.lineWidth = this.option.width;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
 
-    const point = this.points.get(e.pointerID);
     ctx.beginPath();
     ctx.moveTo(point.x, point.y);
     ctx.lineTo(e.localX, e.localY);
+    ctx.closePath();
     ctx.stroke();
 
     this.points.set(e.pointerID, new Point(e.localX, e.localY));
   };
 
   private onFinishStroke = (e: MouseEvent) => {
-    console.log("ID : ", e.pointerID, e.localX, e.localY);
-
     this.points.delete(e.pointerID);
   };
 
@@ -107,6 +107,10 @@ export class DrawableBitmap extends Bitmap {
    */
   public clear(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    //現在描画中のストロークを中断させる。
+    this.points.clear();
+    this.ctx.beginPath();
   }
 
   private get canvas(): HTMLCanvasElement {
@@ -125,6 +129,6 @@ export enum DrawingMode {
 
 export class DrawingOption {
   mode: DrawingMode;
-  color: string = "#000000";
-  width: number = 1.0;
+  color?: string;
+  width?: number;
 }
