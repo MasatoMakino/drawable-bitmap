@@ -38,8 +38,34 @@ export class DrawableBitmap extends Bitmap {
   /**
    * 描画状態を画像から復元する
    * @param {string} url
+   * @param mode fetchのモード指定
    */
-  public restoreImage(url: string): void {}
+  public restoreImage(url: string, mode: RequestMode = "no-cors"): void {
+    const header = new Headers();
+    header.append("Content-Type", "image/jpeg");
+
+    const init = {
+      method: "GET",
+      headers: header,
+      mode: mode
+    };
+
+    const myRequest = new Request(url, init);
+
+    fetch(myRequest)
+      .then(response => {
+        return response.blob();
+      })
+      .then(blob => {
+        this.clear();
+        const image = new Image();
+        image.onload = () => {
+          const ctx = this.ctx;
+          ctx.drawImage(image, 0, 0);
+        };
+        image.src = URL.createObjectURL(blob);
+      });
+  }
 
   /**
    * 描画モードを更新する。
