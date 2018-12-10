@@ -26,7 +26,7 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "npm run prettier:src && tsc && npm run babel && npm run doc",
-    "prettier:src": "prettier --write './!(bin)/**/*.{js,ts,json}' ",
+    "prettier:src": "prettier --write './!(bin|docs)/**/*.{js,ts,json}' ",
     "babel": "webpack --mode development --module-bind js=babel-loader ./docs/demo/main.js --output ./docs/demo/bundle.js",
     "watch":" npm run watch:tsc | npm run watch:babel | npm run watch:server",
     "watch:tsc":"tsc -w",
