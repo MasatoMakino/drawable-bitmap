@@ -65,6 +65,34 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="createjs-drawable-bitmap">createjs-drawable-bitmap</h1>
+				<p><a href="https://codeclimate.com/github/MasatoMakino/createjs-drawable-bitmap/maintainability"><img src="https://api.codeclimate.com/v1/badges/f90aab522723c812411a/maintainability" alt="Maintainability"></a>
+				<a href="LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="MIT License"></a></p>
+				<h2 id="demo">Demo</h2>
+				<p><a href="https://masatomakino.github.io/createjs-drawable-bitmap/demo/index.html">Demo Page</a></p>
+				<h2 id="getting-started">Getting Started</h2>
+				<h3 id="install">Install</h3>
+				<p>createjs-drawable-bitmap depend on <a href="https://github.com/CreateJS/EaselJS">CreateJS / EaselJS</a></p>
+				<pre><code class="language-bash">npm install easeljs --save-dev</code></pre>
+				<p>or load script files in html.</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.createjs.com/1.0.0/easeljs.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<p>and</p>
+				<pre><code class="language-bash">npm install https://github.com/MasatoMakino/createjs-drawable-bitmap.git --save-dev</code></pre>
+				<h3 id="import">Import</h3>
+				<p>createjs-drawable-bitmap is composed of ES6 modules and TypeScript d.ts files.</p>
+				<p>At first, import classes.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { DrawableBitmap } <span class="hljs-keyword">from</span> <span class="hljs-string">"createjs-drawable-bitmap"</span>;</code></pre>
+				<h3 id="add-bitmap">Add bitmap</h3>
+				<pre><code class="language-js"><span class="hljs-keyword">let</span> bitmap = <span class="hljs-keyword">new</span> DrawableBitmap(<span class="hljs-number">640</span>, <span class="hljs-number">480</span>);
+stage.addChild(bitmap);
+bitmap.startDrawing({
+  <span class="hljs-attr">mode</span>: <span class="hljs-string">"pen"</span>
+});</code></pre>
+				<p><a href="https://masatomakino.github.io/createjs-drawable-bitmap/api/index.html">API documents</a></p>
+				<h3 id="multi-touch-support">Multi touch support</h3>
+				<p>If you need multi-touch support, enable <a href="https://createjs.com/docs/easeljs/classes/Touch.html">Touch Class</a>.</p>
+				<pre><code class="language-js">createjs.Touch.enable(stage);</code></pre>
+				<h2 id="license">License</h2>
+				<p>createjs-drawable-bitmap is <a href="LICENSE">MIT licensed</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
