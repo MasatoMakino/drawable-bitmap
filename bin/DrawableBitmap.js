@@ -62,10 +62,53 @@ export class DrawableBitmap extends Bitmap {
         this.hitArea = area;
     }
     /**
-     * 描画状態を画像から復元する
+     * 描画状態を画像から復元する。
+     * 対応画像はjpegおよびpngのみ。
      * @param {string} url
+     * @param {RequestMode} mode fetchのモード指定
      */
-    restoreImage(url) { }
+    restoreImage(url, mode = "no-cors") {
+        const init = {
+            method: "GET",
+            mode: mode
+        };
+        const myRequest = new Request(url, init);
+        fetch(myRequest)
+            .then(response => {
+            return response.blob();
+        })
+            .then(blob => {
+            this.drawImage(blob);
+        });
+    }
+    /**
+     * Fetchで取得したBlobからコンテンツタイプを確認する。
+     * jpg / png ファイルの場合はtrueを返す。
+     * @param blob
+     * @return {boolean}
+     */
+    isImageType(blob) {
+        switch (blob.type) {
+            case "image/jpeg":
+            case "image/png":
+                return true;
+        }
+        return false;
+    }
+    /**
+     * Fetchで取得したBlobをカンバス上に描画する。
+     * @param blob
+     */
+    drawImage(blob) {
+        if (!this.isImageType(blob))
+            return;
+        this.clear();
+        const image = new Image();
+        image.onload = () => {
+            this.ctx.drawImage(image, 0, 0);
+        };
+        image.src = URL.createObjectURL(blob);
+    }
     /**
      * 描画モードを更新する。
      * 描画モードオプションは指定のある値だけが利用され、未指定のものは現状値が引き継がれる。

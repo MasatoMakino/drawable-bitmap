@@ -16,10 +16,24 @@ export declare class DrawableBitmap extends Bitmap {
      */
     private initHitArea;
     /**
-     * 描画状態を画像から復元する
+     * 描画状態を画像から復元する。
+     * 対応画像はjpegおよびpngのみ。
      * @param {string} url
+     * @param {RequestMode} mode fetchのモード指定
      */
-    restoreImage(url: string): void;
+    restoreImage(url: string, mode?: RequestMode): void;
+    /**
+     * Fetchで取得したBlobからコンテンツタイプを確認する。
+     * jpg / png ファイルの場合はtrueを返す。
+     * @param blob
+     * @return {boolean}
+     */
+    private isImageType;
+    /**
+     * Fetchで取得したBlobをカンバス上に描画する。
+     * @param blob
+     */
+    private drawImage;
     /**
      * 描画モードを更新する。
      * 描画モードオプションは指定のある値だけが利用され、未指定のものは現状値が引き継がれる。

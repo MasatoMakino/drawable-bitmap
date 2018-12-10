@@ -1,6 +1,6 @@
 {
   "name": "createjs-drawable-bitmap",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./bin/index.js",
   "types": "./bin/index.d.ts",
   "repository": "https://MasatoMakino@github.com/MasatoMakino/createjs-drawable-bitmap.git",
@@ -39,7 +39,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run build"
+      "pre-commit": "npm run prettier:src"
     }
   }
 }
