@@ -53,7 +53,7 @@ bitmap.startDrawing({
 
 ### Multi touch support
 
-If you need multi-touch support, enable [Touch Class](https://createjs.com/docs/easeljs/classes/Touch.html)
+If you need multi-touch support, enable [Touch Class](https://createjs.com/docs/easeljs/classes/Touch.html).
 
 ```js
 createjs.Touch.enable(stage);
