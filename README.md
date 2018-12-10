@@ -51,6 +51,15 @@ bitmap.startDrawing({
 
 [API documents](https://masatomakino.github.io/createjs-drawable-bitmap/api/index.html)
 
+### Multi touch support
+
+If you need multi-touch support, enable [Touch Class](https://createjs.com/docs/easeljs/classes/Touch.html)
+
+```js
+createjs.Touch.enable(stage);
+```
+
+
 ## License
 
 createjs-drawable-bitmap is [MIT licensed](LICENSE).
