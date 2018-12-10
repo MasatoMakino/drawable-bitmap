@@ -26,8 +26,7 @@ const onDomContentsLoaded = () => {
   createjs.Ticker.on("tick", updateStage);
   testBitmap();
   initDrawing();
-
-  bitmap.restoreImage("./img02.jpg");
+  bitmap.restoreImage("./img01.png");
 };
 
 const initInputListener = () => {

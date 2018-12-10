@@ -36,17 +36,14 @@ export class DrawableBitmap extends Bitmap {
   }
 
   /**
-   * 描画状態を画像から復元する
+   * 描画状態を画像から復元する。
+   * 対応画像はjpegおよびpngのみ。
    * @param {string} url
-   * @param mode fetchのモード指定
+   * @param {RequestMode} mode fetchのモード指定
    */
   public restoreImage(url: string, mode: RequestMode = "no-cors"): void {
-    const header = new Headers();
-    header.append("Content-Type", "image/jpeg");
-
     const init = {
       method: "GET",
-      headers: header,
       mode: mode
     };
 
@@ -57,14 +54,37 @@ export class DrawableBitmap extends Bitmap {
         return response.blob();
       })
       .then(blob => {
-        this.clear();
-        const image = new Image();
-        image.onload = () => {
-          const ctx = this.ctx;
-          ctx.drawImage(image, 0, 0);
-        };
-        image.src = URL.createObjectURL(blob);
+        this.drawImage(blob);
       });
+  }
+
+  /**
+   * Fetchで取得したBlobからコンテンツタイプを確認する。
+   * jpg / png ファイルの場合はtrueを返す。
+   * @param blob
+   * @return {boolean}
+   */
+  private isImageType(blob): boolean {
+    switch (blob.type) {
+      case "image/jpeg":
+      case "image/png":
+        return true;
+    }
+    return false;
+  }
+
+  /**
+   * Fetchで取得したBlobをカンバス上に描画する。
+   * @param blob
+   */
+  private drawImage(blob): void {
+    if (!this.isImageType(blob)) return;
+    this.clear();
+    const image = new Image();
+    image.onload = () => {
+      this.ctx.drawImage(image, 0, 0);
+    };
+    image.src = URL.createObjectURL(blob);
   }
 
   /**
