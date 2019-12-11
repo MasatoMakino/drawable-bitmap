@@ -5,7 +5,7 @@
 
 ## Demo
 
-[Demo Page](https://masatomakino.github.io/createjs-drawable-bitmap/demo/index.html)
+[Demo Page](https://masatomakino.github.io/createjs-drawable-bitmap/demo/)
 
 ## Getting Started
 
@@ -58,7 +58,6 @@ If you need multi-touch support, enable [Touch Class](https://createjs.com/docs/
 ```js
 createjs.Touch.enable(stage);
 ```
-
 
 ## License
 

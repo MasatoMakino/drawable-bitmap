@@ -74,8 +74,8 @@ export declare class DrawableBitmap extends Bitmap {
      * 画像をクリアする。全ての画素はrgba(0, 0, 0, 0.0)となる。
      */
     clear(): void;
-    private readonly canvas;
-    private readonly ctx;
+    private get canvas();
+    private get ctx();
 }
 export declare enum DrawingMode {
     pen = "pen",

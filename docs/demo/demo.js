@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./docs/demo/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./demoSrc/demo.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -98,15 +98,15 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./docs/demo/main.js":
-/*!***************************!*\
-  !*** ./docs/demo/main.js ***!
-  \***************************/
+/***/ "./demoSrc/demo.js":
+/*!*************************!*\
+  !*** ./demoSrc/demo.js ***!
+  \*************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bin_DrawableBitmap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../bin/DrawableBitmap */ \"./bin/DrawableBitmap.js\");\n\nlet stage;\nlet bitmap;\nconst modeSelector = 'input[name=\"mode\"]';\nconst colorSelector = 'input[name=\"color\"]';\nconst widthSelector = 'input[name=\"width\"]';\nconst clearSelector = 'input[name=\"clearButton\"]';\n\nconst onDomContentsLoaded = () => {\n  initInputListener(); //ステージ更新処理\n\n  const updateStage = () => {\n    stage.update();\n  }; //stageの初期化\n\n\n  const canvas = document.getElementById(\"appCanvas\");\n  stage = new createjs.Stage(canvas);\n  stage.enableMouseOver();\n  createjs.Touch.enable(stage);\n  console.log(stage._mouseOverIntervalID);\n  createjs.Ticker.on(\"tick\", updateStage);\n  testBitmap();\n  initDrawing();\n  bitmap.restoreImage(\"./img01.png\");\n};\n\nconst initInputListener = () => {\n  const elm = document.querySelectorAll(modeSelector);\n  elm.forEach(item => {\n    item.onchange = e => {\n      bitmap.startDrawing({\n        mode: e.target.value\n      });\n    };\n  });\n\n  document.querySelector(colorSelector).onchange = e => {\n    bitmap.startDrawing({\n      color: e.target.value\n    });\n  };\n\n  document.querySelector(widthSelector).onchange = e => {\n    bitmap.startDrawing({\n      width: e.target.value\n    });\n  };\n\n  document.querySelector(clearSelector).onclick = e => {\n    bitmap.clear();\n  };\n};\n\nconst testBitmap = () => {\n  bitmap = new _bin_DrawableBitmap__WEBPACK_IMPORTED_MODULE_0__[\"DrawableBitmap\"](640, 480);\n  stage.addChild(bitmap);\n};\n\nconst initDrawing = () => {\n  const mode = document.querySelector(modeSelector + \":checked\").value;\n  const color = document.querySelector(colorSelector).value;\n  const width = document.querySelector(widthSelector).value;\n  bitmap.startDrawing({\n    mode: mode,\n    color: color,\n    width: width\n  });\n};\n/**\n * DOMContentLoaded以降に初期化処理を実行する\n */\n\n\nif (document.readyState !== \"loading\") {\n  onDomContentsLoaded();\n} else {\n  document.addEventListener(\"DOMContentLoaded\", onDomContentsLoaded);\n}\n\n//# sourceURL=webpack:///./docs/demo/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _bin_DrawableBitmap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../bin/DrawableBitmap */ \"./bin/DrawableBitmap.js\");\n\nlet stage;\nlet bitmap;\nconst modeSelector = 'input[name=\"mode\"]';\nconst colorSelector = 'input[name=\"color\"]';\nconst widthSelector = 'input[name=\"width\"]';\nconst clearSelector = 'input[name=\"clearButton\"]';\n\nconst onDomContentsLoaded = () => {\n  initInputListener(); //ステージ更新処理\n\n  const updateStage = () => {\n    stage.update();\n  }; //stageの初期化\n\n\n  const canvas = document.getElementById(\"appCanvas\");\n  stage = new createjs.Stage(canvas);\n  stage.enableMouseOver();\n  createjs.Touch.enable(stage);\n  console.log(stage._mouseOverIntervalID);\n  createjs.Ticker.on(\"tick\", updateStage);\n  testBitmap();\n  initDrawing();\n  bitmap.restoreImage(\"./img01.png\");\n};\n\nconst initInputListener = () => {\n  const elm = document.querySelectorAll(modeSelector);\n  elm.forEach(item => {\n    item.onchange = e => {\n      bitmap.startDrawing({\n        mode: e.target.value\n      });\n    };\n  });\n\n  document.querySelector(colorSelector).onchange = e => {\n    bitmap.startDrawing({\n      color: e.target.value\n    });\n  };\n\n  document.querySelector(widthSelector).onchange = e => {\n    bitmap.startDrawing({\n      width: e.target.value\n    });\n  };\n\n  document.querySelector(clearSelector).onclick = e => {\n    bitmap.clear();\n  };\n};\n\nconst testBitmap = () => {\n  bitmap = new _bin_DrawableBitmap__WEBPACK_IMPORTED_MODULE_0__[\"DrawableBitmap\"](640, 480);\n  stage.addChild(bitmap);\n};\n\nconst initDrawing = () => {\n  const mode = document.querySelector(modeSelector + \":checked\").value;\n  const color = document.querySelector(colorSelector).value;\n  const width = document.querySelector(widthSelector).value;\n  bitmap.startDrawing({\n    mode: mode,\n    color: color,\n    width: width\n  });\n};\n/**\n * DOMContentLoaded以降に初期化処理を実行する\n */\n\n\nif (document.readyState !== \"loading\") {\n  onDomContentsLoaded();\n} else {\n  document.addEventListener(\"DOMContentLoaded\", onDomContentsLoaded);\n}\n\n//# sourceURL=webpack:///./demoSrc/demo.js?");
 
 /***/ })
 

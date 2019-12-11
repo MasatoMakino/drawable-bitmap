@@ -64,34 +64,50 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="createjs-drawable-bitmap">createjs-drawable-bitmap</h1>
+				<a href="#createjs-drawable-bitmap" id="createjs-drawable-bitmap" style="color: inherit; text-decoration: none;">
+					<h1>createjs-drawable-bitmap</h1>
+				</a>
 				<p><a href="https://codeclimate.com/github/MasatoMakino/createjs-drawable-bitmap/maintainability"><img src="https://api.codeclimate.com/v1/badges/f90aab522723c812411a/maintainability" alt="Maintainability"></a>
 				<a href="LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="MIT License"></a></p>
-				<h2 id="demo">Demo</h2>
-				<p><a href="https://masatomakino.github.io/createjs-drawable-bitmap/demo/index.html">Demo Page</a></p>
-				<h2 id="getting-started">Getting Started</h2>
-				<h3 id="install">Install</h3>
+				<a href="#demo" id="demo" style="color: inherit; text-decoration: none;">
+					<h2>Demo</h2>
+				</a>
+				<p><a href="https://masatomakino.github.io/createjs-drawable-bitmap/demo/">Demo Page</a></p>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h2>Getting Started</h2>
+				</a>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h3>Install</h3>
+				</a>
 				<p>createjs-drawable-bitmap depend on <a href="https://github.com/CreateJS/EaselJS">CreateJS / EaselJS</a></p>
 				<pre><code class="language-bash">npm install easeljs --save-dev</code></pre>
 				<p>or load script files in html.</p>
 				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.createjs.com/1.0.0/easeljs.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
 				<p>and</p>
 				<pre><code class="language-bash">npm install https://github.com/MasatoMakino/createjs-drawable-bitmap.git --save-dev</code></pre>
-				<h3 id="import">Import</h3>
+				<a href="#import" id="import" style="color: inherit; text-decoration: none;">
+					<h3>Import</h3>
+				</a>
 				<p>createjs-drawable-bitmap is composed of ES6 modules and TypeScript d.ts files.</p>
 				<p>At first, import classes.</p>
 				<pre><code class="language-js"><span class="hljs-keyword">import</span> { DrawableBitmap } <span class="hljs-keyword">from</span> <span class="hljs-string">"createjs-drawable-bitmap"</span>;</code></pre>
-				<h3 id="add-bitmap">Add bitmap</h3>
+				<a href="#add-bitmap" id="add-bitmap" style="color: inherit; text-decoration: none;">
+					<h3>Add bitmap</h3>
+				</a>
 				<pre><code class="language-js"><span class="hljs-keyword">let</span> bitmap = <span class="hljs-keyword">new</span> DrawableBitmap(<span class="hljs-number">640</span>, <span class="hljs-number">480</span>);
 stage.addChild(bitmap);
 bitmap.startDrawing({
   <span class="hljs-attr">mode</span>: <span class="hljs-string">"pen"</span>
 });</code></pre>
 				<p><a href="https://masatomakino.github.io/createjs-drawable-bitmap/api/index.html">API documents</a></p>
-				<h3 id="multi-touch-support">Multi touch support</h3>
+				<a href="#multi-touch-support" id="multi-touch-support" style="color: inherit; text-decoration: none;">
+					<h3>Multi touch support</h3>
+				</a>
 				<p>If you need multi-touch support, enable <a href="https://createjs.com/docs/easeljs/classes/Touch.html">Touch Class</a>.</p>
 				<pre><code class="language-js">createjs.Touch.enable(stage);</code></pre>
-				<h2 id="license">License</h2>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
 				<p>createjs-drawable-bitmap is <a href="LICENSE">MIT licensed</a>.</p>
 			</div>
 		</div>
@@ -101,16 +117,19 @@ bitmap.startDrawing({
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_drawablebitmap_.html">"<wbr>Drawable<wbr>Bitmap"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/drawingmode.html" class="tsd-kind-icon">Drawing<wbr>Mode</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/drawablebitmap.html" class="tsd-kind-icon">Drawable<wbr>Bitmap</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/drawingoption.html" class="tsd-kind-icon">Drawing<wbr>Option</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -128,6 +147,7 @@ bitmap.startDrawing({
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -176,7 +196,7 @@ bitmap.startDrawing({
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
