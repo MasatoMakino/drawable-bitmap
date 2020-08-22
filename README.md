@@ -3,6 +3,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/f90aab522723c812411a/maintainability)](https://codeclimate.com/github/MasatoMakino/createjs-drawable-bitmap/maintainability)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
+[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=MasatoMakino&repo=createjs-drawable-bitmap&show_owner=true)](https://github.com/MasatoMakino/createjs-drawable-bitmap)
+
 ## Demo
 
 [Demo Page](https://masatomakino.github.io/createjs-drawable-bitmap/demo/)
@@ -45,7 +47,7 @@ import { DrawableBitmap } from "createjs-drawable-bitmap";
 let bitmap = new DrawableBitmap(640, 480);
 stage.addChild(bitmap);
 bitmap.startDrawing({
-  mode: "pen"
+  mode: "pen",
 });
 ```
 
