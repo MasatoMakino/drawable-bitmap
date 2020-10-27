@@ -19,7 +19,7 @@ createjs-drawable-bitmap depend on [CreateJS / EaselJS](https://github.com/Creat
 npm install easeljs --save-dev
 ```
 
-or load script files in html.
+or load script files in a html.
 
 ```html
 <script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
