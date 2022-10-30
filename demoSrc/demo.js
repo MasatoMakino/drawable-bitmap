@@ -44,7 +44,6 @@ const onDomContentsLoaded = () => {
   stage = new createjs.Stage(canvas);
   stage.enableMouseOver();
   createjs.Touch.enable(stage);
-  console.log(stage._mouseOverIntervalID);
 
   createjs.Ticker.on("tick", updateStage);
   testBitmap();
