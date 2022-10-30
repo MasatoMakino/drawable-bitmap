@@ -1,4 +1,4 @@
-import { DrawableBitmap, DrawingMode } from "../bin/DrawableBitmap";
+import { DrawableBitmap } from "..";
 
 let stage;
 let bitmap;
@@ -8,7 +8,30 @@ const colorSelector = 'input[name="color"]';
 const widthSelector = 'input[name="width"]';
 const clearSelector = 'input[name="clearButton"]';
 
+const initInput = () => {
+  document.body.innerHTML =
+    //language html
+    `
+  <canvas id="appCanvas" width="640" height="480"></canvas>
+    <p>
+      mode:
+      <label><input type="radio" name="mode" value="pen" checked />pen</label>
+      <label><input type="radio" name="mode" value="eraser" />eraser</label>
+    </p>
+    <p>
+        color:
+        <label><input type="color" name="color" value="#ff00ff" /></label>
+    </p>
+    <p>
+        width:
+        <label><input type="number" name="width" min="1" max="20" value="8" /></label>
+    </p>
+    <p>
+        <input type="button" name="clearButton" value="Clear"/>
+    </p>`;
+};
 const onDomContentsLoaded = () => {
+  initInput();
   initInputListener();
 
   //ステージ更新処理
@@ -21,7 +44,6 @@ const onDomContentsLoaded = () => {
   stage = new createjs.Stage(canvas);
   stage.enableMouseOver();
   createjs.Touch.enable(stage);
-  console.log(stage._mouseOverIntervalID);
 
   createjs.Ticker.on("tick", updateStage);
   testBitmap();
@@ -31,25 +53,25 @@ const onDomContentsLoaded = () => {
 
 const initInputListener = () => {
   const elm = document.querySelectorAll(modeSelector);
-  elm.forEach(item => {
-    item.onchange = e => {
+  elm.forEach((item) => {
+    item.onchange = (e) => {
       bitmap.startDrawing({ mode: e.target.value });
     };
   });
 
-  document.querySelector(colorSelector).onchange = e => {
+  document.querySelector(colorSelector).onchange = (e) => {
     bitmap.startDrawing({
-      color: e.target.value
+      color: e.target.value,
     });
   };
 
-  document.querySelector(widthSelector).onchange = e => {
+  document.querySelector(widthSelector).onchange = (e) => {
     bitmap.startDrawing({
-      width: e.target.value
+      width: e.target.value,
     });
   };
 
-  document.querySelector(clearSelector).onclick = e => {
+  document.querySelector(clearSelector).onclick = (e) => {
     bitmap.clear();
   };
 };
@@ -66,7 +88,7 @@ const initDrawing = () => {
   bitmap.startDrawing({
     mode: mode,
     color: color,
-    width: width
+    width: width,
   });
 };
 
