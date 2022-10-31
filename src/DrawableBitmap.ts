@@ -1,12 +1,15 @@
 import Bitmap = createjs.Bitmap;
-import MouseEvent = createjs.MouseEvent;
 import Shape = createjs.Shape;
-import Point = createjs.Point;
+import { DrawableCanvas, DrawingEvent } from "./DrawableCanvas";
+import MouseEvent = createjs.MouseEvent;
 
+/**
+ * DrawableCanvasをラップしたcreate.jsのディスプレイオブジェクト
+ * DrawableCanvasを継承したクラスではない。
+ */
 export class DrawableBitmap extends Bitmap {
-  private option?: DrawingOption;
-  private isDrawing: boolean = false;
-  private points: Map<number, Point>;
+  public drawableCanvas: DrawableCanvas;
+  private isDrawing: boolean;
 
   /**
    * コンストラクタ
@@ -17,9 +20,53 @@ export class DrawableBitmap extends Bitmap {
     super(document.createElement("canvas"));
     this.canvas.width = w;
     this.canvas.height = h;
-    this.points = new Map<number, Point>();
-    this.clear();
+    this.drawableCanvas = new DrawableCanvas(this.canvas);
     this.initHitArea();
+  }
+
+  /**
+   * ユーザーによるMouse / Touchでの描画操作を開始する。
+   */
+  public startDrawing(option: DrawingOption): void {
+    this.drawableCanvas.changeMode(option);
+    if (this.isDrawing) return;
+    this.isDrawing = true;
+
+    this.addEventListener("mousedown", this.onStartStroke);
+    this.addEventListener("pressmove", this.onStroke);
+    this.addEventListener("pressup", this.onFinishStroke);
+  }
+  /**
+   * ユーザーによるMouse / Touchでの描画操作を終了する。
+   */
+  public finishDrawing(): void {
+    if (!this.isDrawing) return;
+    this.isDrawing = false;
+
+    this.removeEventListener("mousedown", this.onStartStroke);
+    this.removeEventListener("pressmove", this.onStroke);
+    this.removeEventListener("pressup", this.onFinishStroke);
+  }
+
+  public onStartStroke = (e) => {
+    console.log(e);
+    this.drawableCanvas.onStartStroke(DrawableBitmap.convertToDrawingEvent(e));
+  };
+
+  public onFinishStroke = (e) => {
+    this.drawableCanvas.onFinishStroke(DrawableBitmap.convertToDrawingEvent(e));
+  };
+
+  public onStroke = (e) => {
+    this.drawableCanvas.onStroke(DrawableBitmap.convertToDrawingEvent(e));
+  };
+
+  private static convertToDrawingEvent(e: MouseEvent): DrawingEvent {
+    return {
+      pointerId: e.pointerID,
+      offsetX: e.localX,
+      offsetY: e.localY,
+    };
   }
 
   /**
@@ -35,185 +82,14 @@ export class DrawableBitmap extends Bitmap {
     this.hitArea = area;
   }
 
-  /**
-   * 描画状態を画像から復元する。
-   * 対応画像はjpegおよびpngのみ。
-   * @param {string} url
-   * @param {RequestMode} mode fetchのモード指定
-   */
-  public restoreImage(url: string, mode: RequestMode = "no-cors"): void {
-    const init = {
-      method: "GET",
-      mode: mode
-    };
-
-    const myRequest = new Request(url, init);
-
-    fetch(myRequest)
-      .then(response => {
-        return response.blob();
-      })
-      .then(blob => {
-        this.drawImage(blob);
-      });
-  }
-
-  /**
-   * Fetchで取得したBlobからコンテンツタイプを確認する。
-   * jpg / png ファイルの場合はtrueを返す。
-   * @param blob
-   * @return {boolean}
-   */
-  private isImageType(blob): boolean {
-    switch (blob.type) {
-      case "image/jpeg":
-      case "image/png":
-        return true;
-    }
-    return false;
-  }
-
-  /**
-   * Fetchで取得したBlobをカンバス上に描画する。
-   * @param blob
-   */
-  private drawImage(blob): void {
-    if (!this.isImageType(blob)) return;
-    this.clear();
-    const image = new Image();
-    image.onload = () => {
-      this.ctx.drawImage(image, 0, 0);
-    };
-    image.src = URL.createObjectURL(blob);
-  }
-
-  /**
-   * 描画モードを更新する。
-   * 描画モードオプションは指定のある値だけが利用され、未指定のものは現状値が引き継がれる。
-   * @param {DrawingOption} option
-   */
-  public changeMode(option: DrawingOption): void {
-    this.option = option;
-
-    const ctx = this.ctx;
-    if (this.option.color == null) {
-      this.option.color = ctx.strokeStyle as string;
-    }
-    if (this.option.width == null) {
-      this.option.width = ctx.lineWidth;
-    }
-
-    ctx.strokeStyle = this.option.color;
-    ctx.lineWidth = this.option.width;
-  }
-
-  /**
-   * ユーザーによるMouse / Touchでの描画操作を開始する。
-   */
-  public startDrawing(option: DrawingOption): void {
-    this.changeMode(option);
-
-    if (this.isDrawing) return;
-    this.isDrawing = true;
-
-    this.addEventListener("mousedown", this.onStartStroke);
-    this.addEventListener("pressmove", this.onStroke);
-    this.addEventListener("pressup", this.onFinishStroke);
-  }
-
-  /**
-   * ユーザーによるMouse / Touchでの描画操作を終了する。
-   */
-  public finishDrawing(): void {
-    if (!this.isDrawing) return;
-    this.isDrawing = false;
-
-    this.removeEventListener("mousedown", this.onStartStroke);
-    this.removeEventListener("pressmove", this.onStroke);
-    this.removeEventListener("pressup", this.onFinishStroke);
-  }
-
-  /**
-   * ストローク処理が開始された際の処理。
-   * ストローク座標を記録する。
-   * @param {createjs.MouseEvent} e
-   */
-  private onStartStroke = (e: MouseEvent) => {
-    this.points.set(e.pointerID, new Point(e.localX, e.localY));
-  };
-
-  /**
-   * ストローク中の処理
-   * @param {createjs.MouseEvent} e
-   */
-  private onStroke = (e: MouseEvent) => {
-    const point = this.points.get(e.pointerID);
-    if (point == null) return;
-
-    this.updateStrokeStyle();
-
-    const ctx = this.ctx;
-    ctx.beginPath();
-    ctx.moveTo(point.x, point.y);
-    ctx.lineTo(e.localX, e.localY);
-    ctx.closePath();
-    ctx.stroke();
-
-    this.points.set(e.pointerID, new Point(e.localX, e.localY));
-  };
-
-  /**
-   * 2dコンテクストのストロークスタイルを更新する。
-   * onStroke関数の内部処理。
-   */
-  private updateStrokeStyle(): void {
-    const ctx = this.ctx;
-    switch (this.option.mode) {
-      case DrawingMode.pen:
-        ctx.globalCompositeOperation = "source-over";
-        break;
-      case DrawingMode.eraser:
-        ctx.globalCompositeOperation = "destination-out";
-        break;
-    }
-    ctx.strokeStyle = this.option.color;
-    ctx.lineWidth = this.option.width;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-  }
-
-  /**
-   * ストロークが終了した際の処理。
-   * 座標マップから座標値を削除する。
-   * @param {createjs.MouseEvent} e
-   */
-  private onFinishStroke = (e: MouseEvent) => {
-    this.points.delete(e.pointerID);
-  };
-
-  /**
-   * 画像をクリアする。全ての画素はrgba(0, 0, 0, 0.0)となる。
-   */
-  public clear(): void {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    //現在描画中のストロークを中断させる。
-    this.points.clear();
-    this.ctx.beginPath();
-  }
-
   private get canvas(): HTMLCanvasElement {
     return this.image as HTMLCanvasElement;
-  }
-
-  private get ctx() {
-    return this.canvas.getContext("2d");
   }
 }
 
 export enum DrawingMode {
   pen = "pen",
-  eraser = "eraser"
+  eraser = "eraser",
 }
 
 export class DrawingOption {

@@ -48,31 +48,31 @@ const onDomContentsLoaded = () => {
   createjs.Ticker.on("tick", updateStage);
   testBitmap();
   initDrawing();
-  bitmap.restoreImage("./img01.png");
+  bitmap.drawableCanvas.restoreImage("./img01.png");
 };
 
 const initInputListener = () => {
   const elm = document.querySelectorAll(modeSelector);
   elm.forEach((item) => {
     item.onchange = (e) => {
-      bitmap.startDrawing({ mode: e.target.value });
+      bitmap.drawableCanvas.startDrawing({ mode: e.target.value });
     };
   });
 
   document.querySelector(colorSelector).onchange = (e) => {
-    bitmap.startDrawing({
+    bitmap.drawableCanvas.startDrawing({
       color: e.target.value,
     });
   };
 
   document.querySelector(widthSelector).onchange = (e) => {
-    bitmap.startDrawing({
+    bitmap.drawableCanvas.startDrawing({
       width: e.target.value,
     });
   };
 
   document.querySelector(clearSelector).onclick = (e) => {
-    bitmap.clear();
+    bitmap.drawableCanvas.clear();
   };
 };
 
