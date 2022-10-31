@@ -24,7 +24,7 @@ export class DrawableCanvas {
    * ストローク中の処理
    * @param {createjs.MouseEvent} e
    */
-  private onStroke = (e: PointerEvent) => {
+  public onStroke = (e: DrawingEvent) => {
     const point = this.points.get(e.pointerId);
     if (point == null) return;
 
@@ -71,7 +71,7 @@ export class DrawableCanvas {
    * ストローク座標を記録する。
    * @param {createjs.MouseEvent} e
    */
-  private onStartStroke = (e: PointerEvent) => {
+  public onStartStroke = (e: DrawingEvent) => {
     this.points.set(e.pointerId, new StrokePoint(e.offsetX, e.offsetY));
   };
 
@@ -80,7 +80,7 @@ export class DrawableCanvas {
    * 座標マップから座標値を削除する。
    * @param {PointerEvent} e
    */
-  private onFinishStroke = (e: PointerEvent) => {
+  public onFinishStroke = (e: DrawingEvent) => {
     this.points.delete(e.pointerId);
   };
 
@@ -91,7 +91,6 @@ export class DrawableCanvas {
    */
   public changeMode(option: DrawingOption): void {
     const ctx = this.canvas.getContext("2d");
-    console.log(option);
     this.option.mode = option.mode;
     this.option.color = option.color ?? (ctx.strokeStyle as string);
     this.option.width = option.width ?? ctx.lineWidth;
@@ -175,4 +174,10 @@ export class DrawableCanvas {
 
 export class StrokePoint {
   constructor(public x: number = 0, public y: number = 0) {}
+}
+
+export interface DrawingEvent {
+  pointerId: number;
+  offsetX: number;
+  offsetY: number;
 }
