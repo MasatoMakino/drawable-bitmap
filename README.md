@@ -46,7 +46,7 @@ import { DrawableBitmap } from "createjs-drawable-bitmap";
 ```js
 let bitmap = new DrawableBitmap(640, 480);
 stage.addChild(bitmap);
-bitmap.startDrawing({
+bitmap.startDisplayObjectDrawing({
   mode: "pen",
 });
 ```

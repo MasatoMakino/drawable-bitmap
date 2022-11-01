@@ -1,7 +1,6 @@
-import { DrawableBitmap } from "..";
+import { DrawableCanvas } from "..";
 
-let stage;
-let bitmap;
+let drawableCanvas;
 
 const modeSelector = 'input[name="mode"]';
 const colorSelector = 'input[name="color"]';
@@ -34,58 +33,43 @@ const onDomContentsLoaded = () => {
   initInput();
   initInputListener();
 
-  //ステージ更新処理
-  const updateStage = () => {
-    stage.update();
-  };
-
-  //stageの初期化
   const canvas = document.getElementById("appCanvas");
-  stage = new createjs.Stage(canvas);
-  stage.enableMouseOver();
-  createjs.Touch.enable(stage);
-
-  createjs.Ticker.on("tick", updateStage);
-  testBitmap();
+  drawableCanvas = new DrawableCanvas(canvas);
   initDrawing();
-  bitmap.drawableCanvas.restoreImage("./img01.png");
+
+  drawableCanvas.restoreImage("./img01.png");
 };
 
 const initInputListener = () => {
   const elm = document.querySelectorAll(modeSelector);
   elm.forEach((item) => {
     item.onchange = (e) => {
-      bitmap.drawableCanvas.startDrawing({ mode: e.target.value });
+      drawableCanvas.startDrawing({ mode: e.target.value });
     };
   });
 
   document.querySelector(colorSelector).onchange = (e) => {
-    bitmap.drawableCanvas.startDrawing({
+    drawableCanvas.startDrawing({
       color: e.target.value,
     });
   };
 
   document.querySelector(widthSelector).onchange = (e) => {
-    bitmap.drawableCanvas.startDrawing({
+    drawableCanvas.startDrawing({
       width: e.target.value,
     });
   };
 
   document.querySelector(clearSelector).onclick = (e) => {
-    bitmap.drawableCanvas.clear();
+    drawableCanvas.clear();
   };
-};
-
-const testBitmap = () => {
-  bitmap = new DrawableBitmap(640, 480);
-  stage.addChild(bitmap);
 };
 
 const initDrawing = () => {
   const mode = document.querySelector(modeSelector + ":checked").value;
   const color = document.querySelector(colorSelector).value;
   const width = document.querySelector(widthSelector).value;
-  bitmap.startDisplayObjectDrawing({
+  drawableCanvas.startDrawing({
     mode: mode,
     color: color,
     width: width,
