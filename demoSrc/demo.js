@@ -85,7 +85,7 @@ const initDrawing = () => {
   const mode = document.querySelector(modeSelector + ":checked").value;
   const color = document.querySelector(colorSelector).value;
   const width = document.querySelector(widthSelector).value;
-  bitmap.startDrawing({
+  bitmap.startDisplayObjectDrawing({
     mode: mode,
     color: color,
     width: width,

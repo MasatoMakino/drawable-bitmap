@@ -27,37 +27,36 @@ export class DrawableBitmap extends Bitmap {
   /**
    * ユーザーによるMouse / Touchでの描画操作を開始する。
    */
-  public startDrawing(option: DrawingOption): void {
+  public startDisplayObjectDrawing(option: DrawingOption): void {
     this.drawableCanvas.changeMode(option);
     if (this.isDrawing) return;
     this.isDrawing = true;
 
-    this.addEventListener("mousedown", this.onStartStroke);
-    this.addEventListener("pressmove", this.onStroke);
-    this.addEventListener("pressup", this.onFinishStroke);
+    this.addEventListener("mousedown", this.redirectStartStroke);
+    this.addEventListener("pressmove", this.redirectStroke);
+    this.addEventListener("pressup", this.redirectFinishStroke);
   }
   /**
    * ユーザーによるMouse / Touchでの描画操作を終了する。
    */
-  public finishDrawing(): void {
+  public finishDisplayObjectDrawing(): void {
     if (!this.isDrawing) return;
     this.isDrawing = false;
 
-    this.removeEventListener("mousedown", this.onStartStroke);
-    this.removeEventListener("pressmove", this.onStroke);
-    this.removeEventListener("pressup", this.onFinishStroke);
+    this.removeEventListener("mousedown", this.redirectStartStroke);
+    this.removeEventListener("pressmove", this.redirectStroke);
+    this.removeEventListener("pressup", this.redirectFinishStroke);
   }
 
-  public onStartStroke = (e) => {
-    console.log(e);
+  private redirectStartStroke = (e) => {
     this.drawableCanvas.onStartStroke(DrawableBitmap.convertToDrawingEvent(e));
   };
 
-  public onFinishStroke = (e) => {
+  private redirectFinishStroke = (e) => {
     this.drawableCanvas.onFinishStroke(DrawableBitmap.convertToDrawingEvent(e));
   };
 
-  public onStroke = (e) => {
+  private redirectStroke = (e) => {
     this.drawableCanvas.onStroke(DrawableBitmap.convertToDrawingEvent(e));
   };
 
