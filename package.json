@@ -1,6 +1,6 @@
 {
   "name": "createjs-drawable-bitmap",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "main": "./bin/index.js",
   "types": "./bin/index.d.ts",
   "repository": "https://MasatoMakino@github.com/MasatoMakino/createjs-drawable-bitmap.git",
