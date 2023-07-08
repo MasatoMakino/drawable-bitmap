@@ -7,9 +7,9 @@
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/easeljs": "^1.0.1",
     "@masatomakino/gulptask-demo-page": "^0.6.7",
-    "@masatomakino/gulptask-dev-server": "0.4.4",
+    "@types/easeljs": "^1.0.1",
+    "browser-sync": "^2.29.3",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
     "pretty-quick": "^3.1.3",
