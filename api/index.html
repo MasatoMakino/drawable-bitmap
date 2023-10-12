@@ -16,25 +16,12 @@
 <a href="LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="MIT License"></a></p>
 <p><a href="https://github.com/MasatoMakino/createjs-drawable-bitmap"><img src="https://github-readme-stats.vercel.app/api/pin/?username=MasatoMakino&repo=createjs-drawable-bitmap&show_owner=true" alt="ReadMe Card"></a></p>
 <a id="md:demo" class="tsd-anchor"></a><h2><a href="#md:demo">Demo</a></h2><p><a href="https://masatomakino.github.io/createjs-drawable-bitmap/demo/">Demo Page</a></p>
-<a id="md:getting-started" class="tsd-anchor"></a><h2><a href="#md:getting-started">Getting Started</a></h2><a id="md:install" class="tsd-anchor"></a><h3><a href="#md:install">Install</a></h3><p>createjs-drawable-bitmap depend on <a href="https://github.com/CreateJS/EaselJS">CreateJS / EaselJS</a></p>
-<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">easeljs</span><span class="hl-1"> </span><span class="hl-3">--save-dev</span>
+<a id="md:getting-started" class="tsd-anchor"></a><h2><a href="#md:getting-started">Getting Started</a></h2><a id="md:install" class="tsd-anchor"></a><h3><a href="#md:install">Install</a></h3><pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">https://github.com/MasatoMakino/createjs-drawable-bitmap.git</span><span class="hl-1"> </span><span class="hl-3">--save-dev</span>
 </code><button>Copy</button></pre>
-<p>or load script files in a html.</p>
-<pre><code class="language-html"><span class="hl-4">&lt;</span><span class="hl-5">script</span><span class="hl-6"> </span><span class="hl-7">src</span><span class="hl-6">=</span><span class="hl-8">&quot;https://code.createjs.com/1.0.0/easeljs.min.js&quot;</span><span class="hl-4">&gt;&lt;/</span><span class="hl-5">script</span><span class="hl-4">&gt;</span>
-</code><button>Copy</button></pre>
-<p>and</p>
-<pre><code class="language-bash"><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-2">install</span><span class="hl-1"> </span><span class="hl-2">https://github.com/MasatoMakino/createjs-drawable-bitmap.git</span><span class="hl-1"> </span><span class="hl-3">--save-dev</span>
-</code><button>Copy</button></pre>
-<a id="md:import" class="tsd-anchor"></a><h3><a href="#md:import">Import</a></h3><p>createjs-drawable-bitmap is composed of ES6 modules and TypeScript d.ts files.</p>
-<p>At first, import classes.</p>
-<pre><code class="language-js"><span class="hl-9">import</span><span class="hl-1"> { </span><span class="hl-10">DrawableBitmap</span><span class="hl-1"> } </span><span class="hl-9">from</span><span class="hl-1"> </span><span class="hl-2">&quot;createjs-drawable-bitmap&quot;</span><span class="hl-1">;</span>
-</code><button>Copy</button></pre>
-<a id="md:add-bitmap" class="tsd-anchor"></a><h3><a href="#md:add-bitmap">Add bitmap</a></h3><pre><code class="language-js"><span class="hl-3">let</span><span class="hl-1"> </span><span class="hl-10">bitmap</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">DrawableBitmap</span><span class="hl-1">(</span><span class="hl-11">640</span><span class="hl-1">, </span><span class="hl-11">480</span><span class="hl-1">);</span><br/><span class="hl-10">stage</span><span class="hl-1">.</span><span class="hl-0">addChild</span><span class="hl-1">(</span><span class="hl-10">bitmap</span><span class="hl-1">);</span><br/><span class="hl-10">bitmap</span><span class="hl-1">.</span><span class="hl-0">startDisplayObjectDrawing</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-10">mode:</span><span class="hl-1"> </span><span class="hl-2">&quot;pen&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">});</span>
+<a id="md:init-canvas" class="tsd-anchor"></a><h3><a href="#md:init-canvas">Init canvas</a></h3><p>createjs-drawable-bitmap is composed of ES6 modules and TypeScript d.ts files.</p>
+<pre><code class="language-js"><span class="hl-4">import</span><span class="hl-1"> { </span><span class="hl-5">DrawableBitmap</span><span class="hl-1"> } </span><span class="hl-4">from</span><span class="hl-1"> </span><span class="hl-2">&quot;createjs-drawable-bitmap&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-6">drawableCanvas</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-0">DrawableCanvas</span><span class="hl-1">(</span><span class="hl-5">document</span><span class="hl-1">.</span><span class="hl-0">getElementById</span><span class="hl-1">(</span><span class="hl-2">&quot;canvas&quot;</span><span class="hl-1">));</span>
 </code><button>Copy</button></pre>
 <p><a href="https://masatomakino.github.io/createjs-drawable-bitmap/api/index.html">API documents</a></p>
-<a id="md:multi-touch-support" class="tsd-anchor"></a><h3><a href="#md:multi-touch-support">Multi touch support</a></h3><p>If you need multi-touch support, enable <a href="https://createjs.com/docs/easeljs/classes/Touch.html">Touch Class</a>.</p>
-<pre><code class="language-js"><span class="hl-10">createjs</span><span class="hl-1">.</span><span class="hl-10">Touch</span><span class="hl-1">.</span><span class="hl-0">enable</span><span class="hl-1">(</span><span class="hl-10">stage</span><span class="hl-1">);</span>
-</code><button>Copy</button></pre>
 <a id="md:license" class="tsd-anchor"></a><h2><a href="#md:license">License</a></h2><p>createjs-drawable-bitmap is <a href="LICENSE">MIT licensed</a>.</p>
 </div></div>
 <div class="col-sidebar">
@@ -66,9 +53,7 @@
 <li>
 <ul>
 <li><a href="#md:install"><span>Install</span></a></li>
-<li><a href="#md:import"><span>Import</span></a></li>
-<li><a href="#md:add-bitmap"><span>Add bitmap</span></a></li>
-<li><a href="#md:multi-touch-support"><span>Multi touch support</span></a></li></ul></li>
+<li><a href="#md:init-canvas"><span>Init canvas</span></a></li></ul></li>
 <li><a href="#md:license"><span>License</span></a></li></ul></li></ul></li></ul></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="modules.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>createjs-<wbr/>drawable-<wbr/>bitmap</span></a>
