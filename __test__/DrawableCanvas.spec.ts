@@ -86,6 +86,10 @@ describe("DrawableCanvas", () => {
     const drawableCanvas = new DrawableCanvas(canvas);
     await drawableCanvas.restoreImage(TestImage);
 
+    expect(Array.from(pickColor(canvas, 0, 0))).toEqual([191, 191, 191, 255]);
+    expect(Array.from(pickColor(canvas, 5, 0))).toEqual([255, 255, 255, 255]);
+    expect(Array.from(pickColor(canvas, 5, 5))).toEqual([191, 191, 191, 255]);
+
     vi.restoreAllMocks();
   });
 });

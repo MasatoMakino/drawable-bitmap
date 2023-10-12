@@ -121,7 +121,10 @@ export class DrawableCanvas {
    * @param {string} url
    * @param {RequestMode} mode fetchのモード指定
    */
-  public restoreImage(url: string, mode: RequestMode = "no-cors"): void {
+  public restoreImage(
+    url: string,
+    mode: RequestMode = "no-cors",
+  ): Promise<void> {
     const init = {
       method: "GET",
       mode: mode,
@@ -129,12 +132,12 @@ export class DrawableCanvas {
 
     const myRequest = new Request(url, init);
 
-    fetch(myRequest)
+    return fetch(myRequest)
       .then((response) => {
         return response.blob();
       })
       .then((blob) => {
-        this.drawImage(blob);
+        return this.drawImage(blob);
       });
   }
 
@@ -157,16 +160,24 @@ export class DrawableCanvas {
    * Fetchで取得したBlobをカンバス上に描画する。
    * @param blob
    */
-  private drawImage(blob: Blob): void {
-    if (!this.isImageType(blob)) return;
+  private drawImage(blob: Blob): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (!this.isImageType(blob)) {
+        resolve();
+      }
 
-    const ctx = this.canvas.getContext("2d");
-    this.clear();
-    const image = new Image();
-    image.onload = () => {
-      ctx.drawImage(image, 0, 0);
-    };
-    image.src = URL.createObjectURL(blob);
+      const image = new Image();
+      const ctx = this.canvas.getContext("2d");
+      this.clear();
+      image.onload = () => {
+        ctx.drawImage(image, 0, 0);
+        resolve();
+      };
+      image.onerror = () => {
+        reject();
+      };
+      image.src = URL.createObjectURL(blob);
+    });
   }
 }
 
