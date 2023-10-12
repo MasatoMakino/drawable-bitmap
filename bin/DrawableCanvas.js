@@ -1,11 +1,10 @@
-import { DrawingMode, DrawingOption } from "./";
+import { DrawingOption } from "./index.js";
 export class DrawableCanvas {
     constructor(canvas) {
         this.canvas = canvas;
         this.isDrawing = false;
         /**
          * ストローク中の処理
-         * @param {createjs.MouseEvent} e
          */
         this.onStroke = (e) => {
             const point = this.points.get(e.pointerId);
@@ -23,7 +22,6 @@ export class DrawableCanvas {
         /**
          * ストローク処理が開始された際の処理。
          * ストローク座標を記録する。
-         * @param {createjs.MouseEvent} e
          */
         this.onStartStroke = (e) => {
             this.points.set(e.pointerId, new StrokePoint(e.offsetX, e.offsetY));
@@ -76,11 +74,10 @@ export class DrawableCanvas {
      * @param {DrawingOption} option
      */
     changeMode(option) {
-        var _a, _b;
         const ctx = this.canvas.getContext("2d");
         this.option.mode = option.mode;
-        this.option.color = (_a = option.color) !== null && _a !== void 0 ? _a : ctx.strokeStyle;
-        this.option.width = (_b = option.width) !== null && _b !== void 0 ? _b : ctx.lineWidth;
+        this.option.color = option.color ?? ctx.strokeStyle;
+        this.option.width = option.width ?? ctx.lineWidth;
         this.updateStrokeStyle();
     }
     /**
@@ -90,10 +87,10 @@ export class DrawableCanvas {
     updateStrokeStyle() {
         const ctx = this.canvas.getContext("2d");
         switch (this.option.mode) {
-            case DrawingMode.pen:
+            case "pen":
                 ctx.globalCompositeOperation = "source-over";
                 break;
-            case DrawingMode.eraser:
+            case "eraser":
                 ctx.globalCompositeOperation = "destination-out";
                 break;
         }

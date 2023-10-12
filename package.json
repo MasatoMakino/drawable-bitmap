@@ -1,7 +1,13 @@
 {
   "name": "createjs-drawable-bitmap",
   "version": "0.1.0",
-  "main": "./bin/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./bin/index.d.ts",
+      "default": "./bin/index.js"
+    }
+  },
   "types": "./bin/index.d.ts",
   "repository": "https://MasatoMakino@github.com/MasatoMakino/createjs-drawable-bitmap.git",
   "author": "MasatoMakino <unagiinu.g@gmail.com>",

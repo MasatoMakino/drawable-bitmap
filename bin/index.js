@@ -1,3 +1,3 @@
-export * from "./DrawingMode";
-export * from "./DrawingOption";
-export * from "./DrawableCanvas";
+export * from "./DrawingMode.js";
+export * from "./DrawingOption.js";
+export * from "./DrawableCanvas.js";

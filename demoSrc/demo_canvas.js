@@ -1,4 +1,4 @@
-import { DrawableCanvas } from "..";
+import { DrawableCanvas } from "../bin/index.js";
 
 let drawableCanvas;
 

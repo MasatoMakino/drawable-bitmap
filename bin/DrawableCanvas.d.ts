@@ -1,4 +1,4 @@
-import { DrawingOption } from "./";
+import { DrawingOption } from "./index.js";
 export declare class DrawableCanvas {
     canvas: HTMLCanvasElement;
     private option?;
@@ -8,7 +8,6 @@ export declare class DrawableCanvas {
     clear(): void;
     /**
      * ストローク中の処理
-     * @param {createjs.MouseEvent} e
      */
     onStroke: (e: DrawingEvent) => void;
     /**
@@ -22,7 +21,6 @@ export declare class DrawableCanvas {
     /**
      * ストローク処理が開始された際の処理。
      * ストローク座標を記録する。
-     * @param {createjs.MouseEvent} e
      */
     onStartStroke: (e: DrawingEvent) => void;
     /**

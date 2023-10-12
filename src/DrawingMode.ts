@@ -1,4 +1,1 @@
-export enum DrawingMode {
-  pen = "pen",
-  eraser = "eraser",
-}
+export type DrawingMode = "pen" | "eraser";

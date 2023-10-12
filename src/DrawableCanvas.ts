@@ -1,4 +1,4 @@
-import { DrawingMode, DrawingOption } from "./";
+import { DrawingOption } from "./index.js";
 
 export class DrawableCanvas {
   private option?: DrawingOption;
@@ -22,7 +22,6 @@ export class DrawableCanvas {
 
   /**
    * ストローク中の処理
-   * @param {createjs.MouseEvent} e
    */
   public onStroke = (e: DrawingEvent) => {
     const point = this.points.get(e.pointerId);
@@ -69,7 +68,6 @@ export class DrawableCanvas {
   /**
    * ストローク処理が開始された際の処理。
    * ストローク座標を記録する。
-   * @param {createjs.MouseEvent} e
    */
   public onStartStroke = (e: DrawingEvent) => {
     this.points.set(e.pointerId, new StrokePoint(e.offsetX, e.offsetY));
@@ -104,10 +102,10 @@ export class DrawableCanvas {
   private updateStrokeStyle(): void {
     const ctx = this.canvas.getContext("2d");
     switch (this.option.mode) {
-      case DrawingMode.pen:
+      case "pen":
         ctx.globalCompositeOperation = "source-over";
         break;
-      case DrawingMode.eraser:
+      case "eraser":
         ctx.globalCompositeOperation = "destination-out";
         break;
     }
@@ -173,7 +171,10 @@ export class DrawableCanvas {
 }
 
 export class StrokePoint {
-  constructor(public x: number = 0, public y: number = 0) {}
+  constructor(
+    public x: number = 0,
+    public y: number = 0,
+  ) {}
 }
 
 export interface DrawingEvent {
