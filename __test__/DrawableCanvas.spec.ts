@@ -77,11 +77,15 @@ describe("DrawableCanvas", () => {
   });
 
   it("should load image", async () => {
-    const mock = vi.fn((blob) => blob.toString());
+    const mock = vi.fn((blob) => {
+      return TestImage;
+    });
     URL.createObjectURL = mock;
 
     const canvas = document.createElement("canvas");
     const drawableCanvas = new DrawableCanvas(canvas);
-    drawableCanvas.restoreImage(TestImage);
+    await drawableCanvas.restoreImage(TestImage);
+
+    vi.restoreAllMocks();
   });
 });
