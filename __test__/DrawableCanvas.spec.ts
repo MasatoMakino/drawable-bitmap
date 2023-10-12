@@ -1,5 +1,6 @@
+import { TestImage } from "./TestImage.js";
 import { DrawableCanvas } from "../src/index.js";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 
 describe("DrawableCanvas", () => {
   const pickColor = (canvas: HTMLCanvasElement, x: number, y: number) => {
@@ -73,5 +74,14 @@ describe("DrawableCanvas", () => {
 
     const color2 = pickColor(canvas, 0, 0);
     expect(Array.from(color2)).toEqual([255, 0, 102, 255]);
+  });
+
+  it("should load image", async () => {
+    const mock = vi.fn((blob) => blob.toString());
+    URL.createObjectURL = mock;
+
+    const canvas = document.createElement("canvas");
+    const drawableCanvas = new DrawableCanvas(canvas);
+    drawableCanvas.restoreImage(TestImage);
   });
 });
