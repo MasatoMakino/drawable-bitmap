@@ -1,5 +1,2 @@
-export declare enum DrawingMode {
-    pen = "pen",
-    eraser = "eraser"
-}
+export type DrawingMode = "pen" | "eraser";
 //# sourceMappingURL=DrawingMode.d.ts.map

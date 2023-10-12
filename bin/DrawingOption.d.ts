@@ -1,4 +1,4 @@
-import { DrawingMode } from './DrawingMode';
+import { DrawingMode } from "./index.js";
 export declare class DrawingOption {
     mode: DrawingMode;
     color?: string;
