@@ -6,12 +6,11 @@
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "declarationMap": true /* Generates a sourcemap for each corresponding '.d.ts' file. */,
     "outDir": "./bin" /* Redirect output structure to the directory. */,
-    "rootDir": "./src",
 
     /* Module Resolution Options */
     "moduleResolution": "node16",
     "esModuleInterop": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "__test__", "bin"]
 }
