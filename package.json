@@ -13,15 +13,22 @@
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@masatomakino/gulptask-demo-page": "^0.6.7",
+    "@masatomakino/fake-mouse-event": "^0.0.12",
+    "@masatomakino/gulptask-demo-page": "^0.7.4",
+    "@vitest/coverage-istanbul": "^0.34.4",
     "browser-sync": "^2.29.3",
+    "canvas": "^2.11.2",
     "husky": "^8.0.3",
+    "jsdom": "^22.1.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "typedoc": "^0.24.8",
-    "typescript": "^5.1.6"
+    "typedoc": "^0.25.2",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   },
   "scripts": {
+    "test": "vitest",
+    "coverage": "vitest --run --coverage",
     "start:dev": "npm run server & npm run watch:tsc & npm run watch:demo",
     "build": "npm run buildTS && npm run demo && npm run typedocs",
     "buildTS": "tsc --project tsconfig.json",
