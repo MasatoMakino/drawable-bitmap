@@ -1,6 +1,6 @@
 {
   "name": "@masatomakino/drawable-bitmap",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "exports": {
     ".": {
@@ -9,8 +9,9 @@
     }
   },
   "types": "./bin/index.d.ts",
-  "files": ["bin"],
-
+  "files": [
+    "bin"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://MasatoMakino@github.com/MasatoMakino/drawable-bitmap.git"
