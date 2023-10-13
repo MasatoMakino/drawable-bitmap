@@ -13,6 +13,7 @@
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@masatomakino/fake-mouse-event": "^0.0.12",
     "@masatomakino/gulptask-demo-page": "^0.7.4",
     "@vitest/coverage-istanbul": "^0.34.4",
     "browser-sync": "^2.29.3",
