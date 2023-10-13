@@ -111,12 +111,12 @@ export class DrawableCanvas {
             mode: mode,
         };
         const myRequest = new Request(url, init);
-        fetch(myRequest)
+        return fetch(myRequest)
             .then((response) => {
             return response.blob();
         })
             .then((blob) => {
-            this.drawImage(blob);
+            return this.drawImage(blob);
         });
     }
     /**
@@ -138,15 +138,22 @@ export class DrawableCanvas {
      * @param blob
      */
     drawImage(blob) {
-        if (!this.isImageType(blob))
-            return;
-        const ctx = this.canvas.getContext("2d");
-        this.clear();
-        const image = new Image();
-        image.onload = () => {
-            ctx.drawImage(image, 0, 0);
-        };
-        image.src = URL.createObjectURL(blob);
+        return new Promise((resolve, reject) => {
+            if (!this.isImageType(blob)) {
+                resolve();
+            }
+            const image = new Image();
+            const ctx = this.canvas.getContext("2d");
+            this.clear();
+            image.onload = () => {
+                ctx.drawImage(image, 0, 0);
+                resolve();
+            };
+            image.onerror = () => {
+                reject();
+            };
+            image.src = URL.createObjectURL(blob);
+        });
     }
 }
 export class StrokePoint {
