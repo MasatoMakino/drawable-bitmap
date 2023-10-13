@@ -1,5 +1,5 @@
 {
-  "name": "createjs-drawable-bitmap",
+  "name": "@masatomakino/drawable-bitmap",
   "version": "0.1.0",
   "type": "module",
   "exports": {
@@ -9,7 +9,12 @@
     }
   },
   "types": "./bin/index.d.ts",
-  "repository": "https://MasatoMakino@github.com/MasatoMakino/createjs-drawable-bitmap.git",
+  "files": ["bin"],
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://MasatoMakino@github.com/MasatoMakino/drawable-bitmap.git"
+  },
   "author": "MasatoMakino <unagiinu.g@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -43,5 +48,13 @@
   },
   "lint-staged": {
     "*.{js,ts,css,md}": "prettier --write"
+  },
+  "description": "",
+  "bugs": {
+    "url": "https://github.com/MasatoMakino/drawable-bitmap/issues"
+  },
+  "homepage": "https://github.com/MasatoMakino/drawable-bitmap#readme",
+  "directories": {
+    "doc": "docs"
   }
 }

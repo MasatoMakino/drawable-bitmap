@@ -46,7 +46,7 @@ export declare class DrawableCanvas {
      * @param {string} url
      * @param {RequestMode} mode fetchのモード指定
      */
-    restoreImage(url: string, mode?: RequestMode): void;
+    restoreImage(url: string, mode?: RequestMode): Promise<void>;
     /**
      * Fetchで取得したBlobからコンテンツタイプを確認する。
      * jpg / png ファイルの場合はtrueを返す。
