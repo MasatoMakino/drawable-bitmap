@@ -21,16 +21,16 @@
   "devDependencies": {
     "@masatomakino/fake-mouse-event": "^0.0.12",
     "@masatomakino/gulptask-demo-page": "^0.7.4",
-    "@vitest/coverage-istanbul": "^0.34.4",
+    "@vitest/coverage-istanbul": "^1.0.4",
     "browser-sync": "^2.29.3",
     "canvas": "^2.11.2",
     "husky": "^8.0.3",
-    "jsdom": "^22.1.0",
+    "jsdom": "^23.0.1",
     "lint-staged": "^15.1.0",
     "prettier": "^3.1.0",
     "typedoc": "^0.25.4",
     "typescript": "^5.3.3",
-    "vitest": "^0.34.6"
+    "vitest": "^1.0.4"
   },
   "scripts": {
     "test": "vitest",
