@@ -22,7 +22,7 @@
     "@masatomakino/fake-mouse-event": "^0.0.12",
     "@masatomakino/gulptask-demo-page": "^0.7.4",
     "@vitest/coverage-istanbul": "^1.0.4",
-    "browser-sync": "^2.29.3",
+    "browser-sync": "^3.0.2",
     "canvas": "^2.11.2",
     "husky": "^8.0.3",
     "jsdom": "^23.0.1",
