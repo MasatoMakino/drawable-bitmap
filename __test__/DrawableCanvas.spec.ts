@@ -6,8 +6,8 @@ import { getPointerEvent } from "@masatomakino/fake-mouse-event";
 describe("DrawableCanvas", () => {
   const pickColor = (canvas: HTMLCanvasElement, x: number, y: number) => {
     const ctx = canvas.getContext("2d");
-    const pixel = ctx.getImageData(x, y, 1, 1);
-    return pixel.data;
+    const pixel = ctx?.getImageData(x, y, 1, 1);
+    return pixel?.data as Uint8ClampedArray;
   };
 
   const stroke = (
@@ -97,7 +97,6 @@ describe("DrawableCanvas", () => {
     expect(Array.from(pickColor(canvas, 5, 5))).toEqual([191, 191, 191, 255]);
 
     vi.restoreAllMocks();
-    URL.createObjectURL = undefined;
   });
 
   it("should load image without support type", async () => {
@@ -111,12 +110,13 @@ describe("DrawableCanvas", () => {
 
     expect(Array.from(pickColor(canvas, 0, 0))).toEqual([0, 0, 0, 0]);
     vi.restoreAllMocks();
-    URL.createObjectURL = undefined;
   });
 
-  it.fails("load image with Invalid url", async () => {
+  it("load image with Invalid url", async () => {
     const canvas = document.createElement("canvas");
     const drawableCanvas = new DrawableCanvas(canvas);
-    await drawableCanvas.restoreImage("not_exist.png");
+    expect(
+      drawableCanvas.restoreImage("https://example.com/not_exist.png"),
+    ).rejects.toThrowError();
   });
 });

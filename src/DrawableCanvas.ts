@@ -134,6 +134,9 @@ export class DrawableCanvas {
 
     return fetch(myRequest)
       .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error : Network response was not ok.`);
+        }
         return response.blob();
       })
       .then((blob) => {
