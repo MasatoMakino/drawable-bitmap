@@ -30,7 +30,7 @@
     "prettier": "^3.5.3",
     "typedoc": "^0.28.5",
     "typescript": "^5.8.3",
-    "webdriverio": "^9.12.7"
+    "webdriverio": "^9.14.0"
   },
   "scripts": {
     "test": "vitest --run",
