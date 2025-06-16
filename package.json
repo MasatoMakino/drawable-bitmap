@@ -26,7 +26,7 @@
     "@vitest/coverage-istanbul": "^3.2.3",
     "browser-sync": "^3.0.4",
     "husky": "^9.1.7",
-    "lint-staged": "^16.1.0",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
     "typedoc": "^0.28.5",
     "typescript": "^5.8.3",
