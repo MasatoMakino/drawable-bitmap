@@ -23,7 +23,7 @@
     "@masatomakino/gulptask-demo-page": "^0.10.0",
     "@masatomakino/release-helper": "^0.2.0",
     "@vitest/browser": "*",
-    "@vitest/coverage-istanbul": "^3.2.3",
+    "@vitest/coverage-istanbul": "^3.2.4",
     "browser-sync": "^3.0.4",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
