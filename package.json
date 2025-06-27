@@ -27,7 +27,7 @@
     "browser-sync": "^3.0.4",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
-    "prettier": "^3.6.1",
+    "prettier": "^3.6.2",
     "typedoc": "^0.28.5",
     "typescript": "^5.8.3",
     "webdriverio": "^9.16.2"
