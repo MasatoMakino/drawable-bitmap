@@ -5,8 +5,17 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: "webdriverio",
-      name: "chrome",
       headless: true,
+      instances: [
+        {
+          browser: "chrome",
+          capabilities: {
+            "goog:chromeOptions": {
+              args: ["--use-gl=angle", "--use-angle=swiftshader"],
+            },
+          },
+        },
+      ],
     },
     coverage: {
       provider: "istanbul",
