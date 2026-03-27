@@ -21,7 +21,7 @@
   "devDependencies": {
     "@masatomakino/fake-mouse-event": "^0.2.0",
     "@masatomakino/gulptask-demo-page": "^0.10.1",
-    "@masatomakino/release-helper": "^0.2.0",
+    "@masatomakino/release-helper": "^0.3.2",
     "@vitest/browser": "*",
     "@vitest/coverage-istanbul": "^3.2.4",
     "browser-sync": "^3.0.4",
